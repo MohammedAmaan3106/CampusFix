@@ -1,5 +1,5 @@
 
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = "campusfix-84qbecz5u-amaan-f3c2.vercel.app ";
 
 const complaintList = document.getElementById("complaint-list");
 const emptyMessage = document.getElementById("empty-message");
