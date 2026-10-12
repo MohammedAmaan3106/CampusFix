@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusFix | Campus Issue Reporting</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <a class="brand" href="#">
+            <span class="brand-icon">C</span>
+            <span>CampusFix</span>
+        </a>
+
+        <p class="nav-label">WORKSPACE</p>
+        <nav>
+            <a class="nav-link active" href="#dashboard">▦ &nbsp; Dashboard</a>
+            <a class="nav-link" href="#complaints">☷ &nbsp; All complaints</a>
+            <a class="nav-link" href="#report">＋ &nbsp; Report an issue</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="help-icon">?</div>
+            <strong>Need assistance?</strong>
+            <p>Help us make our campus better.</p>
+        </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">CAMPUS OPERATIONS</p>
+                <h1>Dashboard</h1>
+            </div>
+            <div class="profile">
+                <div class="avatar">S</div>
+                <div>
+                    <strong>Student Portal</strong>
+                    <small>Campus community</small>
+                </div>
+            </div>
+        </header>
+
+        <section class="welcome">
+            <div>
+                <span class="welcome-tag">YOUR VOICE MATTERS</span>
+                <h2>A better campus starts<br>with <span>you.</span></h2>
+                <p>Report campus issues and help get them resolved.</p>
+                <button class="primary-button" id="open-report">
+                    + Report an issue
+                </button>
+            </div>
+            <div class="welcome-art" aria-hidden="true">
+                <div class="art-circle"></div>
+                <div class="art-card">
+                    <span>✓</span>
+                    <div>
+                        <strong>Make an impact</strong>
+                        <small>One report at a time</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Complaint statistics">
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Total reports</span>
+                    <span class="stat-icon purple">▤</span>
+                </div>
+                <strong class="stat-number" id="total-count">0</strong>
+                <small>All reported issues</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Pending</span>
+                    <span class="stat-icon orange">◷</span>
+                </div>
+                <strong class="stat-number" id="pending-count">0</strong>
+                <small>Awaiting resolution</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>In progress</span>
+                    <span class="stat-icon blue">↻</span>
+                </div>
+                <strong class="stat-number" id="progress-count">0</strong>
+                <small>Being worked on</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Resolved</span>
+                    <span class="stat-icon green">✓</span>
+                </div>
+                <strong class="stat-number" id="resolved-count">0</strong>
+                <small>Successfully completed</small>
+            </article>
+        </section>
+
+        <section class="complaints-section" id="complaints">
+            <div class="section-heading">
+                <div>
+                    <h2>Recent complaints</h2>
+                    <p>Keep track of what's happening on campus.</p>
+                </div>
+                <button class="secondary-button" id="refresh-button">
+                    ↻ Refresh
+                </button>
+            </div>
+
+            <div class="filters">
+                <input
+                    id="search-input"
+                    type="search"
+                    placeholder="Search complaints..."
+                    aria-label="Search complaints"
+                >
+                <select id="status-filter" aria-label="Filter by status">
+                    <option value="All">All statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+            </div>
+
+            <div id="complaint-list" class="complaint-list"></div>
+            <p id="empty-message" class="empty-message">
+                No complaints match your search.
+            </p>
+        </section>
+
+        <footer>CampusFix · Together, we improve campus life.</footer>
+    </main>
+
+    <dialog id="report-dialog">
+        <div class="dialog-heading">
+            <div>
+                <p class="eyebrow">CAMPUS IMPROVEMENT</p>
+                <h2>Report an issue</h2>
+                <p>Tell us what needs attention.</p>
+            </div>
+            <button id="close-report" class="close-button" aria-label="Close">
+                ×
+            </button>
+        </div>
+
+        <form id="report-form">
+            <label for="title">Issue title</label>
+            <input
+                id="title"
+                name="title"
+                maxlength="120"
+                placeholder="e.g. Broken classroom fan"
+                required
+            >
+
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="Infrastructure">Infrastructure</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Water">Water</option>
+                <option value="Wi-Fi">Wi-Fi</option>
+                <option value="Cleanliness">Cleanliness</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="location">Campus location</label>
+            <input
+                id="location"
+                name="location"
+                maxlength="120"
+                placeholder="e.g. Block A, Room 204"
+                required
+            >
+
+            <label for="description">Description</label>
+            <textarea
+                id="description"
+                name="description"
+                maxlength="1000"
+                rows="3"
+                placeholder="Describe the problem..."
+                required
+            ></textarea>
+
+            <button class="primary-button submit-button" type="submit">
+                Submit report →
+            </button>
+            <p id="form-message" role="status"></p>
+        </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
